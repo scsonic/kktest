@@ -1,9 +1,8 @@
-package com.ygk.kktest.Model;
+package com.ygk.kktest.Model
 
-import com.google.gson.annotations.SerializedName ;
+import com.google.gson.annotations.SerializedName
 
 data class Attraction (
-
     @SerializedName("id"            ) var id           : Int?                = null,
     @SerializedName("name"          ) var name         : String?             = null,
     @SerializedName("name_zh"       ) var nameZh       : String?             = null,
@@ -26,12 +25,14 @@ data class Attraction (
     @SerializedName("staytime"      ) var staytime     : String?             = null,
     @SerializedName("modified"      ) var modified     : String?             = null,
     @SerializedName("url"           ) var url          : String?             = null,
-    @SerializedName("category"      ) var category     : ArrayList<Category> = arrayListOf(),
-    @SerializedName("target"        ) var target       : ArrayList<Target>   = arrayListOf(),
-    @SerializedName("service"       ) var service      : ArrayList<Service>  = arrayListOf(),
-    @SerializedName("friendly"      ) var friendly     : ArrayList<String>   = arrayListOf(),
+    @SerializedName("category"      ) var category     : ArrayList<IdName>   = arrayListOf(),
+    @SerializedName("target"        ) var target       : ArrayList<IdName>   = arrayListOf(),
+    @SerializedName("service"       ) var service      : ArrayList<IdName>   = arrayListOf(),
+    @SerializedName("friendly"      ) var friendly     : ArrayList<IdName>   = arrayListOf(),
     @SerializedName("images"        ) var images       : ArrayList<Images>   = arrayListOf(),
-    @SerializedName("files"         ) var files        : ArrayList<String>   = arrayListOf(),
-    @SerializedName("links"         ) var links        : ArrayList<String>   = arrayListOf()
+
+    // ERROR no example data about files field: []
+    // @SerializedName("files"         ) var files        : ArrayList<String>   = arrayListOf(),
+    @SerializedName("links"         ) var links        : ArrayList<Link>   = arrayListOf()
 
 )
