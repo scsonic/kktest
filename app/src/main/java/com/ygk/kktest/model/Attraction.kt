@@ -35,4 +35,14 @@ data class Attraction (
     // @SerializedName("files"         ) var files        : ArrayList<String>   = arrayListOf(),
     @SerializedName("links"         ) var links        : ArrayList<Link>   = arrayListOf()
 
-)
+) {
+
+    fun getFirstImage(): String {
+        if ( images.size > 0 ){
+            return images.get(0).src!!
+        }
+        else {
+            return "" ;
+        }
+    }
+}
