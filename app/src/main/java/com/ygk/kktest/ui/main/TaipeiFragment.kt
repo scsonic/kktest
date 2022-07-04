@@ -28,21 +28,22 @@ class TaipeiFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main2, container, false)
 
-
-        return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel2::class.java)
 
         adapter = AttractionAdapter(viewModel)
         binding.rvList.adapter = adapter
+        binding.lifecycleOwner = this
+
         viewModel.getData()
         viewModel.listLiveData.observe(viewLifecycleOwner, Observer {
             Log.e(TAG, "list size=" + it.size)
             adapter.notifyDataSetChanged()
         })
+        return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
     }
 
 }

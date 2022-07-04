@@ -2,8 +2,12 @@ package com.ygk.kktest.ui.main
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.ygk.kktest.model.Attraction
 import com.ygk.kktest.model.AttractionResult
 import com.ygk.kktest.api.APIClient
@@ -16,6 +20,8 @@ class MainViewModel2: ViewModel() {
 
     var currentPage:Int = 1 ;
     var listLiveData : MutableLiveData<List<Attraction>> = MutableLiveData()
+
+    //var openItemEvent: MutableLiveData<Event<String>> = MutableLiveData()
 
     fun getData() {
         APIClient.share.getAttractionList(currentPage, object: APIClient.OnAttractionCallback {
@@ -37,4 +43,6 @@ class MainViewModel2: ViewModel() {
 //            }
 //        })
     }
+
+
 }
