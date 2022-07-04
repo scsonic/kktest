@@ -8,6 +8,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.ygk.kktest.R
 import com.ygk.kktest.model.Attraction
 import com.ygk.kktest.databinding.RecycleviewItemBinding
 
@@ -46,4 +47,15 @@ class AttractionAdapter(private val viewModel: MainViewModel2):
             }
         }
     }
+}
+
+
+@BindingAdapter("imageUrl")
+fun bindImage(imageView: ImageView, url: String) {
+    Glide.with(imageView.context)
+        .load(url)
+        .placeholder(R.drawable.ic_baseline_image_24)
+        .error(R.drawable.ic_baseline_image_not_supported_24)
+        .centerCrop()
+        .into(imageView)
 }

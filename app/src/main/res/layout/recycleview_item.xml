@@ -52,7 +52,7 @@
                 <TextView
                     android:id="@+id/tvCategory"
                     android:layout_weight="0.33"
-                    android:text="@{attr.category.get(0).name}"
+                    android:text="@{attr.concatCategory()}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 </TextView>

@@ -45,4 +45,8 @@ data class Attraction (
             return "" ;
         }
     }
+
+    fun concatCategory(): String {
+        return category.joinToString { it -> it.name!! }
+    }
 }
