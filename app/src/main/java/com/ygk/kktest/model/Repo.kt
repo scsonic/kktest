@@ -1,7 +1,6 @@
-package com.ygk.kktest.Model
+package com.ygk.kktest.model
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import com.ygk.kktest.api.APIClient
 
 class Repo{

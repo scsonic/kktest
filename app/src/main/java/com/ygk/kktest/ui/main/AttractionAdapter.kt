@@ -3,7 +3,7 @@ package com.ygk.kktest.ui.main
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ygk.kktest.Model.Attraction
+import com.ygk.kktest.model.Attraction
 import com.ygk.kktest.databinding.RecycleviewItemBinding
 
 class AttractionAdapter(private val viewModel: MainViewModel2):
@@ -25,17 +25,13 @@ class AttractionAdapter(private val viewModel: MainViewModel2):
         return list?.count() ?: 0
     }
 
-
     class ViewHolder private constructor(private val binding: RecycleviewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(viewModel: MainViewModel2, attr: Attraction) {
 
             binding.viewModel = viewModel
-            binding.attr = attr
-//            if (item != null) {
-//                binding.item = item
-//            }
+            binding.attr = attr // need clean project
             binding.executePendingBindings()
         }
 

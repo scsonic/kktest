@@ -1,4 +1,4 @@
-package com.ygk.kktest.Model
+package com.ygk.kktest.model
 
 import com.google.gson.annotations.SerializedName
 

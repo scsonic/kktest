@@ -5,7 +5,7 @@
     <data>
         <variable
             name="attr"
-            type="com.ygk.kktest.Model.Attraction" />
+            type="com.ygk.kktest.model.Attraction" />
         <variable
             name="viewModel"
             type="com.ygk.kktest.ui.main.MainViewModel2" />

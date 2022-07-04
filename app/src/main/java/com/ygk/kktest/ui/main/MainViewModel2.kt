@@ -4,27 +4,24 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ygk.kktest.Model.Attraction
-import com.ygk.kktest.Model.AttractionResult
+import com.ygk.kktest.model.Attraction
+import com.ygk.kktest.model.AttractionResult
 import com.ygk.kktest.api.APIClient
-import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 //@HiltViewModel
-class MainViewModel2 @Inject constructor(
-    private val state: Bundle?
-): ViewModel() {
+class MainViewModel2: ViewModel() {
 
     var TAG = "MainViewModel2" ;
 
     var currentPage:Int = 1 ;
     var listLiveData : MutableLiveData<List<Attraction>> = MutableLiveData()
-    //取資料
-    private fun getData() {
+
+    fun getData() {
         APIClient.share.getAttractionList(currentPage, object: APIClient.OnAttractionCallback {
             override fun onSuccess(result: AttractionResult){
                 Log.e(TAG, "On Success") ;
-                listLiveData.value = result.data
+                listLiveData.postValue(result.data)
             }
             override fun onFail(ex: Exception){
                 Log.e(TAG, "On FAIL") ;

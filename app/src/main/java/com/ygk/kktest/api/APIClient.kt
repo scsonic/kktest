@@ -2,14 +2,9 @@ package com.ygk.kktest.api
 
 import android.util.Log
 import com.google.gson.Gson
-import com.ygk.kktest.Model.AttractionResult
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import com.ygk.kktest.model.AttractionResult
 import okhttp3.*
 import java.io.IOException
-import javax.inject.Singleton
 
 const val TEST_URL = "https://www.travel.taipei/open-api/zh-tw/Attractions/All?page=1"
 const val TAG = "APIClient"

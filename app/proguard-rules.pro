@@ -23,7 +23,7 @@
   *** rewind();
 }
 
--keep public class com.ygk.kktest.Model.*
+-keep public class com.ygk.kktest.model.*
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
