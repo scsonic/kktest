@@ -1,47 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="80dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="attr"
+            type="com.ygk.kktest.Model.Attraction" />
+        <variable
+            name="viewModel"
+            type="com.ygk.kktest.ui.main.MainViewModel2" />
+    </data>
 
-    <LinearLayout
-        android:layout_margin="5dp"
-        android:orientation="horizontal"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/ivImage"
-            android:layout_height="80dp"
-            android:layout_width="80dp"
-            android:src="@mipmap/ic_launcher">
-        </ImageView>
+        android:layout_height="80dp">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_weight="0.33"
+            <ImageView
+                android:id="@+id/ivImage"
+                android:layout_height="80dp"
+                android:layout_width="80dp"
+                android:src="@mipmap/ic_launcher">
+            </ImageView>
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            </TextView>
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_weight="0.33"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@{attr.name}">
+                </TextView>
 
-            <TextView
-                android:id="@+id/tvAddress"
-                android:layout_weight="0.33"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </TextView>
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_weight="0.33"
+                    android:text="@{attr.address}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </TextView>
 
-            <TextView
-                android:id="@+id/tvCategory"
-                android:layout_weight="0.33"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </TextView>
+                <TextView
+                    android:id="@+id/tvCategory"
+                    android:layout_weight="0.33"
+                    android:text="@{attr.category.get(0).name}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </TextView>
 
+            </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
