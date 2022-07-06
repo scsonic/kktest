@@ -26,7 +26,7 @@ class MainViewModel2 @Inject constructor(private val repository: Repo) : ViewMod
     var listLiveData : MutableLiveData<List<Attraction>> = MutableLiveData()
 
     init {
-
+        Log.i(TAG, "MainViewModel2 init")
     }
     //var openItemEvent: MutableLiveData<Event<String>> = MutableLiveData()
     fun doWork() {

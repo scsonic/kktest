@@ -11,12 +11,17 @@ import com.bumptech.glide.request.RequestOptions
 import com.ygk.kktest.R
 import com.ygk.kktest.model.Attraction
 import com.ygk.kktest.databinding.RecycleviewItemBinding
+import javax.inject.Inject
 
-class AttractionAdapter(private val viewModel: MainViewModel2):
+class AttractionAdapter @Inject constructor (val viewModel: MainViewModel2):
     RecyclerView.Adapter<AttractionAdapter.ViewHolder>(){
+    var TAG = "AttractionAdapter" ;
+
+    init {
+        Log.i(TAG, "AttractionAdapter init")
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         return ViewHolder.from(parent)
     }
 

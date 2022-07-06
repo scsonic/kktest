@@ -15,8 +15,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class TaipeiActivity : AppCompatActivity() {
-
     var TAG: String = "TaipeiActivity"
+
+    @Inject
     lateinit var adapter: AttractionAdapter
 
     @Inject
@@ -30,8 +31,7 @@ class TaipeiActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_taipei)
         setContentView(binding.root) ;
 
-
-        adapter = AttractionAdapter(viewModel)
+        //adapter = AttractionAdapter(viewModel)
         binding.rvList.adapter = adapter
         binding.lifecycleOwner = this
 
