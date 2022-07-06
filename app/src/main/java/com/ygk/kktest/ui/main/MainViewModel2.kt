@@ -17,7 +17,7 @@ import dagger.hilt.android.scopes.ActivityRetainedScoped
 import dagger.hilt.android.scopes.FragmentScoped
 import javax.inject.Inject
 
-@FragmentScoped
+@ActivityRetainedScoped
 class MainViewModel2 @Inject constructor(private val repository: Repo) : ViewModel() {
 
     var TAG = "MainViewModel2" ;

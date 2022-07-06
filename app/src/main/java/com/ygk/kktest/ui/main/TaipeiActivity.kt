@@ -2,26 +2,44 @@ package com.ygk.kktest.ui.main
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.ygk.kktest.R
 import com.ygk.kktest.databinding.ActivityTaipeiBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TaipeiActivity : AppCompatActivity() {
 
     var TAG: String = "TaipeiActivity"
-    var binding: ActivityTaipeiBinding? = null
+    lateinit var adapter: AttractionAdapter
+
+    @Inject
+    lateinit var viewModel: MainViewModel2
+
+    lateinit var binding: ActivityTaipeiBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_taipei)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_taipei)
+        setContentView(binding.root) ;
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, TaipeiFragment.newInstance())
-                .commitNow()
-        }
+
+        adapter = AttractionAdapter(viewModel)
+        binding.rvList.adapter = adapter
+        binding.lifecycleOwner = this
+
+        viewModel.getData()
+        viewModel.listLiveData.observe(this, Observer {
+            Log.e(TAG, "list size=" + it.size)
+            adapter.notifyDataSetChanged()
+        })
+
     }
 }
