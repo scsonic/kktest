@@ -11,17 +11,27 @@ import com.bumptech.glide.request.RequestOptions
 import com.ygk.kktest.model.Attraction
 import com.ygk.kktest.model.AttractionResult
 import com.ygk.kktest.api.APIClient
+import com.ygk.kktest.model.Repo
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.scopes.ActivityRetainedScoped
+import dagger.hilt.android.scopes.FragmentScoped
 import javax.inject.Inject
 
-//@HiltViewModel
-class MainViewModel2: ViewModel() {
+@FragmentScoped
+class MainViewModel2 @Inject constructor(private val repository: Repo) : ViewModel() {
 
     var TAG = "MainViewModel2" ;
 
     var currentPage:Int = 1 ;
     var listLiveData : MutableLiveData<List<Attraction>> = MutableLiveData()
 
+    init {
+
+    }
     //var openItemEvent: MutableLiveData<Event<String>> = MutableLiveData()
+    fun doWork() {
+        repository.doRepositoryWork()
+    }
 
     fun getData() {
         APIClient.share.getAttractionList(currentPage, object: APIClient.OnAttractionCallback {
