@@ -19,7 +19,8 @@
             android:layout_margin="5dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:onClick="@{() -> viewModel.openItem(attr)}">
             <ImageView
                 android:id="@+id/ivImage"
                 android:layout_height="80dp"

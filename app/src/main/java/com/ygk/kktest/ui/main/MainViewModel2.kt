@@ -30,12 +30,17 @@ class MainViewModel2 @Inject constructor(
     var currentPage:Int = 1 ;
     var listLiveData : MutableLiveData<List<Attraction>> = MutableLiveData()
 
+
     init {
         Log.i(TAG, "MainViewModel2 init")
     }
     //var openItemEvent: MutableLiveData<Event<String>> = MutableLiveData()
     fun doWork() {
         repository.doRepositoryWork()
+    }
+
+    fun openItem(item:Attraction){
+        Log.i(TAG, "You Press:" + item.name)
     }
 
     suspend fun getData() {
