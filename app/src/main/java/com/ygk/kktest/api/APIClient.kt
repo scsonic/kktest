@@ -6,7 +6,7 @@ import com.ygk.kktest.model.AttractionResult
 import okhttp3.*
 import java.io.IOException
 
-const val TEST_URL = "https://www.travel.taipei/open-api/zh-tw/Attractions/All?page=1"
+const val TEST_URL = "https://www.travel.taipei/open-api/zh-tw/Attractions/All?page="
 const val TAG = "APIClient"
 
 class APIClient {
@@ -22,7 +22,7 @@ class APIClient {
     fun getAttractionList(page:Int, callback: OnAttractionCallback) {
         val client = OkHttpClient()
         val request = Request.Builder()
-            .url(TEST_URL)
+            .url(TEST_URL + page)
             .addHeader("accept", "application/json")
             .build()
 
@@ -39,5 +39,19 @@ class APIClient {
                 callback.onSuccess(result)
             }
         })
+    }
+
+    suspend fun getAttractionList(page:Int): AttractionResult? {
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url(TEST_URL + page)
+            .addHeader("accept", "application/json")
+            .build()
+
+        val response = client.newCall(request).execute()
+        val resStr = response.body?.string()
+        val attr: AttractionResult = Gson().fromJson(resStr, AttractionResult::class.java)
+        Log.i(TAG, "Attraction Result = " + attr.total)
+        return attr
     }
 }

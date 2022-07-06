@@ -8,9 +8,15 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.ygk.kktest.R
 import com.ygk.kktest.databinding.ActivityTaipeiBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.Dispatcher
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,10 +41,20 @@ class TaipeiActivity : AppCompatActivity() {
         binding.rvList.adapter = adapter
         binding.lifecycleOwner = this
 
-        viewModel.getData()
+        CoroutineScope(Dispatchers.IO ).launch {
+            viewModel.getData()
+        }
+
         viewModel.listLiveData.observe(this, Observer {
             Log.e(TAG, "list size=" + it.size)
-            adapter.notifyDataSetChanged()
+            if ( it.size == 0 ){
+                binding.pbLoading.visibility = View.VISIBLE
+            }
+            else {
+                binding.pbLoading.visibility = View.GONE
+                adapter.notifyDataSetChanged()
+            }
+
         })
 
     }
