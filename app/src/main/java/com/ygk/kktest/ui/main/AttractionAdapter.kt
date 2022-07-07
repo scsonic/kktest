@@ -40,6 +40,8 @@ class AttractionAdapter @Inject constructor (val viewModel: MainViewModel2):
         fun bind(viewModel: MainViewModel2, attr: Attraction) {
             binding.viewModel = viewModel
             binding.attr = attr // need clean project
+            binding.imageAdapter = ImageAdapter(attr)
+            binding.rvImageList.adapter = binding.imageAdapter
             binding.executePendingBindings()
         }
 
