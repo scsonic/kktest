@@ -41,9 +41,9 @@ class TaipeiActivity : AppCompatActivity() {
         binding.rvList.adapter = adapter
         binding.lifecycleOwner = this
 
-        lifecycleScope.launch(Dispatchers.IO) {
+        //lifecycleScope.launch(Dispatchers.IO) {
             viewModel.getData()
-        }
+        //}
 
         viewModel.listLiveData.observe(this, Observer {
             Log.e(TAG, "list size=" + it.size)

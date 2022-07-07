@@ -7,7 +7,10 @@ import com.ygk.kktest.model.AttractionResult
 import com.ygk.kktest.api.RemoteDataSource
 import com.ygk.kktest.model.Repo
 import dagger.hilt.android.scopes.ActivityRetainedScoped
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 import javax.inject.Inject
 
 @ActivityRetainedScoped
@@ -30,9 +33,13 @@ class MainViewModel2 @Inject constructor(
     }
 
     fun getData() {
-        var attr:AttractionResult? = repository.getData(currentPage);
-        if ( attr != null ) {
-            listLiveData.postValue(attr.data)
+        viewModelScope.launch(Dispatchers.IO) {
+            var attr:AttractionResult? = repository.getData(currentPage);
+            if ( attr != null ) {
+                listLiveData.postValue(attr.data)
+            }
         }
+
+
     }
 }
