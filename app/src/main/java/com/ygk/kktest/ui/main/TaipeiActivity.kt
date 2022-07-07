@@ -41,7 +41,7 @@ class TaipeiActivity : AppCompatActivity() {
         binding.rvList.adapter = adapter
         binding.lifecycleOwner = this
 
-        CoroutineScope(Dispatchers.IO ).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             viewModel.getData()
         }
 

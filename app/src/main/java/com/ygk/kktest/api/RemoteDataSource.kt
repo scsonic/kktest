@@ -7,11 +7,11 @@ import okhttp3.*
 import java.io.IOException
 
 const val TEST_URL = "https://www.travel.taipei/open-api/zh-tw/Attractions/All?page="
-const val TAG = "APIClient"
+const val TAG = "RemoteDataSource"
 
-class APIClient {
+class RemoteDataSource {
     companion object {
-        val share = APIClient()
+        val share = RemoteDataSource()
     }
 
     interface OnAttractionCallback {
@@ -41,7 +41,8 @@ class APIClient {
         })
     }
 
-    suspend fun getAttractionList(page:Int): AttractionResult? {
+
+    fun getAttractionList(page:Int): AttractionResult? {
         val client = OkHttpClient()
         val request = Request.Builder()
             .url(TEST_URL + page)
@@ -51,7 +52,8 @@ class APIClient {
         val response = client.newCall(request).execute()
         val resStr = response.body?.string()
         val attr: AttractionResult = Gson().fromJson(resStr, AttractionResult::class.java)
-        Log.i(TAG, "Attraction Result = " + attr.total)
+        Log.i(com.ygk.kktest.api.TAG, "Attraction Result = " + attr.total)
         return attr
     }
+
 }
