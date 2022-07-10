@@ -8,7 +8,9 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import javax.inject.Inject
 
-class Repo @Inject constructor(){
+class Repo @Inject constructor(
+    var remote: RemoteDataSource
+){
     var TAG: String = "Repo"
 
     init {
@@ -20,6 +22,6 @@ class Repo @Inject constructor(){
     }
 
     fun getData(page:Int): AttractionResult? {
-        return RemoteDataSource.share.getAttractionList(page)
+        return remote.getAttractionList(page)
     }
 }

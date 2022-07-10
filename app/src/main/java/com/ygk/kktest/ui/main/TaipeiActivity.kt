@@ -9,13 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import com.ygk.kktest.R
 import com.ygk.kktest.databinding.ActivityTaipeiBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import okhttp3.Dispatcher
 import javax.inject.Inject
 
@@ -31,6 +29,9 @@ class TaipeiActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityTaipeiBinding
 
+
+    var job:Job? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_taipei)
@@ -41,21 +42,29 @@ class TaipeiActivity : AppCompatActivity() {
         binding.rvList.adapter = adapter
         binding.lifecycleOwner = this
 
-        //lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.getData()
-        //}
-
-        viewModel.listLiveData.observe(this, Observer {
-            Log.e(TAG, "list size=" + it.size)
-            if ( it.size == 0 ){
-                binding.pbLoading.visibility = View.VISIBLE
-            }
-            else {
+        // using Paging3
+        job = viewModel.viewModelScope.launch(Dispatchers.IO) {
+            viewModel.attractions.collect() {
                 binding.pbLoading.visibility = View.GONE
+                adapter.submitData(it)
                 adapter.notifyDataSetChanged()
             }
+        }
 
-        })
+        System.out.println("TEST XD")
+
+        //viewModel.getData()
+        // Using Live Data
+//        viewModel.listLiveData.observe(this, Observer {
+//            Log.e(TAG, "list size=" + it.size)
+//            if ( it.size == 0 ){
+//                binding.pbLoading.visibility = View.VISIBLE
+//            }
+//            else {
+//                binding.pbLoading.visibility = View.GONE
+//                adapter.notifyDataSetChanged()
+//            }
+//        })
 
     }
 }

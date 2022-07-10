@@ -2,6 +2,8 @@ package com.ygk.kktest.ui.main
 
 import android.util.Log
 import androidx.lifecycle.*
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import com.ygk.kktest.model.Attraction
 import com.ygk.kktest.model.AttractionResult
 import com.ygk.kktest.api.RemoteDataSource
@@ -15,7 +17,7 @@ import javax.inject.Inject
 
 @ActivityRetainedScoped
 class MainViewModel2 @Inject constructor(
-    private val repository: Repo
+    val repository: Repo
 ) : ViewModel() {
 
     var TAG = "MainViewModel2" ;
@@ -39,7 +41,12 @@ class MainViewModel2 @Inject constructor(
                 listLiveData.postValue(attr.data)
             }
         }
-
-
     }
+
+    var attractions = Pager(config = PagingConfig(
+        pageSize = 30
+        , enablePlaceholders = false
+        , initialLoadSize = 30
+    ), pagingSourceFactory = { AttractionPagerDataSource<Any, Any?>(repository.remote) }).flow
+
 }

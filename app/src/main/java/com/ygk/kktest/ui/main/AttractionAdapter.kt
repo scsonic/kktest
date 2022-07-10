@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -14,7 +16,8 @@ import com.ygk.kktest.databinding.RecycleviewItemBinding
 import javax.inject.Inject
 
 class AttractionAdapter @Inject constructor (val viewModel: MainViewModel2):
-    RecyclerView.Adapter<AttractionAdapter.ViewHolder>(){
+    PagingDataAdapter<Attraction, AttractionAdapter.ViewHolder>(AttractionDiffCallback())
+{
     var TAG = "AttractionAdapter" ;
 
     init {
@@ -26,13 +29,15 @@ class AttractionAdapter @Inject constructor (val viewModel: MainViewModel2):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = viewModel.listLiveData.value!![position]
-        holder.bind(viewModel, item)
+        val item = getItem(position)
+        if (item != null) {
+            holder.bind(viewModel, item)
+        }
     }
 
-    override fun getItemCount(): Int {
-        return viewModel.listLiveData.value?.size ?: 0;
-    }
+//    override fun getItemCount(): Int {
+//        return viewModel.listLiveData.value?.size ?: 0;
+//    }
 
     class ViewHolder private constructor(public val binding: RecycleviewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -53,6 +58,17 @@ class AttractionAdapter @Inject constructor (val viewModel: MainViewModel2):
                 return ViewHolder(binding)
             }
         }
+    }
+}
+
+
+class AttractionDiffCallback: DiffUtil.ItemCallback<Attraction>() {
+    override fun areItemsTheSame(oldItem: Attraction, newItem: Attraction): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Attraction, newItem: Attraction): Boolean {
+        return oldItem == newItem
     }
 }
 

@@ -20,7 +20,7 @@ class ImageAdapter @Inject constructor (val attr: Attraction):
     var TAG = "ImageAdapter" ;
 
     init {
-        Log.i(TAG, "ImageAdapter init")
+        //Log.d(TAG, "ImageAdapter init")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
